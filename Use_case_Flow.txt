@@ -1,0 +1,42 @@
+[Client A]                 [Client B]
+    |                           |
+    | submitCaptureRequest(10)  | submitCaptureRequest(5)
+    |                           |
+    v                           v
+[CameraSystem.submitCaptureRequest]
+    |
+    | (Enqueue requests)
+    v
+[PriorityQueue.enqueue]
+    |
+    | (Process next request)
+    v
+[CameraSystem.processNextRequest]
+    |
+    | (Dequeue high priority request)
+    v
+[CaptureManager.processCaptureRequest]
+    |
+    | (Capture image)
+    v
+[CaptureManager.captureImage]
+    |
+    | (Image captured)
+    v
+[Client A callback invoked]
+    |
+    | (Process next request)
+    v
+[CameraSystem.processNextRequest]
+    |
+    | (Dequeue low priority request)
+    v
+[CaptureManager.processCaptureRequest]
+    |
+    | (Capture image)
+    v
+[CaptureManager.captureImage]
+    |
+    | (Image captured)
+    v
+[Client B callback invoked]
